@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			body{
+				background: pink;
+			}
+			div{
+				width: 160px;
+				margin: 0px auto;
+			}
+			.list{
+				width: 100px;
+				list-style: none;
+				overflow: hidden;
+				color: white;
+				background: black;
+				border: 1px solid white;
+				cursor: pointer;
+				display: none;
+			}
+			.list li{
+				height: 30px;
+				line-height: 30px;
+				border-top: none;
+				border-bottom: 1px dashed;
+			}
+			.list li:hover{
+				background: pink;
+			}
+		</style>
+		<script>
+			window.onload=function(){
+				var put=document.querySelector("#put");
+				var list=document.querySelector(".list");
+				put.onmousemove=function(){
+					list.style.display="block";
+				}
+				put.onmouseout=function(){
+					list.style.display="none";
+				}
+				list.onmousemove=function(){
+					list.style.display="block";
+				}
+				list.onmouseout=function(){
+					list.style.display="none";
+				}
+				var lis=list.querySelectorAll("li");
+				for(var i=0 ;i<lis.length; i++){
+					lis[i].onclick=function(){
+						put.value=this.innerHTML;
+						list.style.display="none";
+					}
+				}
+			}
+		</script>
+	</head>
+	<body>
+		<div>
+			<input type="text" id="put" value="请选择游戏名称" />
+			<ul class="list">
+				<li>英雄联盟</li>
+				<li>魔兽世界</li>
+				<li>大话西游</li>
+				<li>王者荣耀</li>
+				<li>一梦江湖</li>
+			</ul>
+		</div>
+	</body>
+</html>
