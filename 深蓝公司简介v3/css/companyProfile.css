@@ -84,7 +84,8 @@
 }
 #about_us_dong{
 	clear: both;
-	width: 26%;
+	/*width: 26%;*/
+	width:288px;
 	margin: 0px auto;
 	padding-top: 20px;
 }
