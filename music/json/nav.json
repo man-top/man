@@ -1,0 +1,7 @@
+{
+    "logo":"音乐Top",
+    "listnav":["发现","音乐","音乐人","我的"],
+    "listicon":["icon-faxian","icon-yinle","icon-tuandui","icon-wode"],
+    "routername":["/","/music/2331136477","/musician/5781","/me"],
+    "imgsrc":["nav1.jpg","nav2.jpg","nav3.jpg","nav4.jpg","nav5.png"]
+}
