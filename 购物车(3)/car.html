@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="vue.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .list {
+            width: 600px;
+        }
+
+        .uls {
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .uls>li {
+            width: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .lis {
+            display: flex;
+            margin-top: 5px;
+            justify-content: space-between;
+        }
+
+        .lis>div {
+            width: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <h3>购物车</h3>
+        <div class="list">
+            <ul class="uls">
+                <li><input @click="AllChoose" type="checkbox" v-model="all" /></li>
+                <li>名称</li>
+                <li>价格</li>
+                <li>数量</li>
+                <li>小计</li>
+                <li>操作</li>
+            </ul>
+            <ul>
+                <li class="lis" v-for="(item,index) in listcar" :key="index">
+                    <div><input type="checkbox" v-model="item.choose"></div>
+                    <div>{{item.name}}</div>
+                    <div>{{item.price}}</div>
+                    <div>
+                        <button @click="prep(index)">-1</button>{{item.count}}
+                        <button @click="add(index)">+1</button>
+                    </div>
+                    <div>{{item.money}}</div>
+                    <div><button @click="remove(index)">删除</button></div>
+                </li>
+            </ul>
+        </div>
+        <h4>总价：￥{{sum}}</h4>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                listcar: [
+                    {
+                        choose: false,
+                        name: "apple",
+                        price: 5.6,
+                        count: 1,
+                        money: 5.6,
+                    },
+                    {
+                        choose: false,
+                        name: "banana",
+                        price: 3.6,
+                        count: 1,
+                        money: 3.6,
+                    },
+                    {
+                        choose: false,
+                        name: "pear",
+                        price: 1.6,
+                        count: 1,
+                        money: 1.6,
+                    },
+                ],
+            },
+            methods: {
+                add(index) {
+                    this.listcar[index].count++;
+                    this.listcar[index].money = parseFloat((this.listcar[index].price * parseInt(this.listcar[index].count)).toFixed(1));
+                },
+                prep(index) {
+                    if (this.listcar[index].count <= 1) {
+                        return;
+                    } else {
+                        this.listcar[index].count--;
+                        this.listcar[index].money = parseFloat((this.listcar[index].price * parseInt(this.listcar[index].count)).toFixed(1));
+                    }
+                },
+                remove(index) {
+                    this.listcar.splice(index, 1);
+                },
+                AllChoose(){
+                    if(this.all ==false){
+                        for(var i=0;i<this.listcar.length;i++){
+                            this.listcar[i].choose=true;
+                        }
+                    }else{
+                        for(var i=0;i<this.listcar.length;i++){
+                            this.listcar[i].choose=false;
+                        }
+                    }
+                }
+            },
+            computed:{
+                sum(){
+                    var sum=0;
+                    for(var i=0;i<this.listcar.length;i++){
+                        if(this.listcar[i].choose==true){
+                            sum+=this.listcar[i].money;
+                        }
+                    }
+                    return parseFloat(sum.toFixed(1));
+                },
+                all(){
+                    var all=false;
+                    for(var i=0;i<this.listcar.length;i++){
+                        if(this.listcar[i].choose == false){
+                            all = false;
+                            return all;
+                        }else{
+                            all = true;
+                        }
+                    }
+                    return all;
+                }
+            }
+
+        })
+    </script>
+</body>
+
+</html>
